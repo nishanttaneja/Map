@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZxR-yz-J0k">
-                                <rect key="frame" x="364" y="54" width="40" height="82"/>
+                                <rect key="frame" x="364" y="54" width="40" height="81"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPM-gN-N6Z">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -37,17 +37,17 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pX7-v8-XdN">
-                                        <rect key="frame" x="0.0" y="40" width="40" height="2"/>
+                                        <rect key="frame" x="0.0" y="40" width="40" height="1"/>
                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="Nlz-WX-VJQ"/>
+                                            <constraint firstAttribute="height" constant="1" id="Nlz-WX-VJQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7H-3d-zfP">
-                                        <rect key="frame" x="0.0" y="42" width="40" height="40"/>
+                                        <rect key="frame" x="0.0" y="41" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="TFy-Qx-OtJ"/>
                                             <constraint firstAttribute="height" constant="40" id="v9M-PL-8Ym"/>
@@ -62,7 +62,7 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="82" id="GTo-WP-55C"/>
+                                    <constraint firstAttribute="height" constant="81" id="GTo-WP-55C"/>
                                     <constraint firstAttribute="width" constant="40" id="l3V-08-NUW"/>
                                 </constraints>
                             </stackView>
