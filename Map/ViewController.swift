@@ -41,7 +41,17 @@ class ViewController: UIViewController {
             currentLocationButton.setImage(UIImage(systemName: "location.fill"), for: .normal)
         }
     }
-    private var currentLocation: CLLocation?
+    private var location: CLLocation? {
+        willSet {
+            guard newValue != nil else { return }
+            updateRegion(to: MKCoordinateRegion(center: newValue!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000))
+            
+        }
+    }
+    private var currentRegion: MKCoordinateRegion {
+        get { mapView.region }
+        set { mapView.setRegion(newValue, animated: true) }
+    }
     
     // IBActions
     @IBAction private func infoButtonAction(_ sender: UIButton) {}
@@ -51,17 +61,40 @@ class ViewController: UIViewController {
     }
 }
 
+//MARK:- MapView SupportingMethods
+private extension ViewController {
+    func updateRegion(to newRegion: MKCoordinateRegion) {
+        currentRegion = newRegion
+    }
+}
+
+//MARK:- MKMapViewDelegate
+extension ViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        print(#function)
+    }
+    func locationManagerDidPauseLocationUpdates(_ manager: CLLocationManager) {
+        print(#function)
+    }
+    func locationManagerDidResumeLocationUpdates(_ manager: CLLocationManager) {
+        print(#function)
+    }
+}
+
 //MARK:- CLLocationManagerDelegate
 extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print(#function, mapView.userLocation.coordinate)
         guard let lastLocation = locations.last else { return }
-        if currentLocation != nil {
-            if lastLocation.coordinate.latitude != currentLocation!.coordinate.latitude,
-               lastLocation.coordinate.longitude != currentLocation!.coordinate.longitude {
-                currentLocation = lastLocation
+        if location != nil {
+            if lastLocation.coordinate.latitude != location!.coordinate.latitude,
+               lastLocation.coordinate.longitude != location!.coordinate.longitude {
+                location = lastLocation
+            } else {
+                updateRegion(to: MKCoordinateRegion(center: location!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000))
             }
         } else {
-            currentLocation = lastLocation
+            location = lastLocation
         }
     }
     
@@ -73,12 +106,21 @@ extension ViewController: CLLocationManagerDelegate {
     }
 }
 
+//MARK:- UIResponders
+extension ViewController {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        requestCurrentLocation = false
+    }
+}
+
 //MARK:- View Lifecycle
 extension ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         infoAndCurrentLocationStackView.configureUI()
         locationManager.delegate = self
+        mapView.showsUserLocation = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
