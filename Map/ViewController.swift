@@ -128,7 +128,7 @@ extension ViewController {
 //MARK:- OverlayViewController
 extension ViewController {
     private func configureDetailedAnnotationViewController() {
-        overlayVC.view.frame = CGRect(x: 0, y: mapView.frame.height - 70, width: view.frame.width, height: view.frame.height - 80)
+        overlayVC.view.frame = CGRect(x: 0, y: view.frame.height - 90, width: view.frame.width, height: view.frame.height - 80)
         overlayVC.gestureRecognizerDelegate = self
         addChild(overlayVC)
         view.addSubview(overlayVC.view)
@@ -138,7 +138,11 @@ extension ViewController {
 //MARK:- OverlayGestureRecognizerDelegate
 extension ViewController: OverlayGestureRecognizerDelegate {
     func handleTapGestureRecognizer(_ recognizer: UITapGestureRecognizer) {
-        print(self, #function)
+        switch overlayVC.currentCardState {
+        case .collapsed: overlayVC.currentCardState = .expanded
+        case .expanded: overlayVC.currentCardState = .fullyExpanded
+        case .fullyExpanded: overlayVC.currentCardState = .collapsed
+        }
     }
 }
 
