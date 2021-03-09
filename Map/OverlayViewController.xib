@@ -8,8 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailedAnnotationViewController" customModule="Map" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OverlayViewController" customModule="Map" customModuleProvider="target">
             <connections>
+                <outlet property="draggableView" destination="LB3-Aq-e1h" id="rF6-rJ-3Ev"/>
+                <outlet property="searchBar" destination="3U1-25-11e" id="sk6-nw-qvI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,6 +25,7 @@
                     <subviews>
                         <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="3U1-25-11e">
                             <rect key="frame" x="0.0" y="15" width="414" height="55"/>
+                            <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="9lN-k5-COP"/>
                             </constraints>
@@ -53,21 +56,50 @@
                         <constraint firstItem="eVx-6o-Pmp" firstAttribute="top" secondItem="LB3-Aq-e1h" secondAttribute="top" constant="5" id="vzV-Al-EpX"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kdG-ZZ-8Xj">
-                    <rect key="frame" x="0.0" y="114" width="414" height="782"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="5jc-MZ-ntd">
+                    <rect key="frame" x="0.0" y="124" width="414" height="300"/>
+                    <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="9vR-qM-yVG"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ek3-i3-YWm">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KaT-4a-net">
+                    <rect key="frame" x="0.0" y="446" width="414" height="416"/>
                     <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GQb-15-zzr">
+                    <rect key="frame" x="20" y="434" width="374" height="2"/>
+                    <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="ipf-8M-1BT"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
             <constraints>
+                <constraint firstItem="KaT-4a-net" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5fx-K7-f0h"/>
                 <constraint firstItem="LB3-Aq-e1h" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="RfZ-2s-b06"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kdG-ZZ-8Xj" secondAttribute="trailing" id="g1L-H6-OJJ"/>
+                <constraint firstItem="5jc-MZ-ntd" firstAttribute="top" secondItem="LB3-Aq-e1h" secondAttribute="bottom" constant="10" id="WOg-Fb-5Qp"/>
+                <constraint firstItem="GQb-15-zzr" firstAttribute="top" secondItem="5jc-MZ-ntd" secondAttribute="bottom" constant="10" id="X8D-ct-6Uc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KaT-4a-net" secondAttribute="bottom" id="Yam-2J-jBr"/>
+                <constraint firstItem="5jc-MZ-ntd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Z5E-NF-ySu"/>
+                <constraint firstItem="GQb-15-zzr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="cz1-rl-KhW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GQb-15-zzr" secondAttribute="trailing" constant="20" id="gDT-aL-f1g"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LB3-Aq-e1h" secondAttribute="trailing" id="hUF-So-iBl"/>
-                <constraint firstItem="kdG-ZZ-8Xj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hgg-qi-bhm"/>
                 <constraint firstItem="LB3-Aq-e1h" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lfn-gA-uGY"/>
-                <constraint firstAttribute="bottom" secondItem="kdG-ZZ-8Xj" secondAttribute="bottom" id="ln3-mg-o7g"/>
-                <constraint firstItem="kdG-ZZ-8Xj" firstAttribute="top" secondItem="LB3-Aq-e1h" secondAttribute="bottom" id="u4T-PD-wZK"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KaT-4a-net" secondAttribute="trailing" id="nHY-Od-8qi"/>
+                <constraint firstItem="KaT-4a-net" firstAttribute="top" secondItem="GQb-15-zzr" secondAttribute="bottom" constant="10" id="vc6-1O-snF"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5jc-MZ-ntd" secondAttribute="trailing" id="vn5-9U-KmN"/>
             </constraints>
             <point key="canvasLocation" x="-26.086956521739133" y="79.6875"/>
         </view>
@@ -75,6 +107,9 @@
     <resources>
         <systemColor name="secondarySystemGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tertiarySystemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

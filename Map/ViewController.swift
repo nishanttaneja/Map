@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var infoAndCurrentLocationStackView: UIStackView!
     @IBOutlet private weak var infoButton: UIButton!
     @IBOutlet private weak var currentLocationButton: UIButton!
-    private var detailedAnnotationVC = DetailedAnnotationViewController(nibName: "DetailedAnnotationViewController", bundle: nil)
+    private var overlayVC = OverlayViewController(nibName: "OverlayViewController", bundle: nil)
     
     // Variables | Constants
     private var locationManager = CLLocationManager()
@@ -70,22 +70,11 @@ private extension ViewController {
 }
 
 //MARK:- MKMapViewDelegate
-extension ViewController: MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        print(#function)
-    }
-    func locationManagerDidPauseLocationUpdates(_ manager: CLLocationManager) {
-        print(#function)
-    }
-    func locationManagerDidResumeLocationUpdates(_ manager: CLLocationManager) {
-        print(#function)
-    }
-}
+extension ViewController: MKMapViewDelegate {}
 
 //MARK:- CLLocationManagerDelegate
 extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(#function, mapView.userLocation.coordinate)
         guard let lastLocation = locations.last else { return }
         if location != nil {
             if lastLocation.coordinate.latitude != location!.coordinate.latitude,
@@ -136,12 +125,20 @@ extension ViewController {
     }
 }
 
-//MARK:- DetailedAnnotationViewController
+//MARK:- OverlayViewController
 extension ViewController {
     private func configureDetailedAnnotationViewController() {
-        detailedAnnotationVC.view.frame = CGRect(x: 0, y: mapView.frame.height - 70, width: view.frame.width, height: view.frame.height - 80)
-        addChild(detailedAnnotationVC)
-        view.addSubview(detailedAnnotationVC.view)
+        overlayVC.view.frame = CGRect(x: 0, y: mapView.frame.height - 70, width: view.frame.width, height: view.frame.height - 80)
+        overlayVC.gestureRecognizerDelegate = self
+        addChild(overlayVC)
+        view.addSubview(overlayVC.view)
+    }
+}
+
+//MARK:- OverlayGestureRecognizerDelegate
+extension ViewController: OverlayGestureRecognizerDelegate {
+    func handleTapGestureRecognizer(_ recognizer: UITapGestureRecognizer) {
+        print(self, #function)
     }
 }
 
