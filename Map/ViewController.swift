@@ -7,6 +7,11 @@
 
 import MapKit
 
+@objc protocol MapViewGestureRecognizerDelegate: class {
+    func handleMapViewTapGestureRecognizer(_ recognizer: UITapGestureRecognizer)
+    func handleMapViewPanGestureRecognizer(_ recognizer: UIPanGestureRecognizer)
+}
+
 class ViewController: UIViewController {
     // IBOutlets
     @IBOutlet private weak var mapView: MKMapView!
@@ -98,9 +103,14 @@ extension ViewController: CLLocationManagerDelegate {
 
 //MARK:- UIResponders
 extension ViewController {
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        super.touchesBegan(touches, with: event)
+//        print(#function)
+//    }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
-        requestCurrentLocation = false
+        if requestCurrentLocation { requestCurrentLocation = false }
+        if overlayVC.currentCardState == .fullyExpanded { overlayVC.currentCardState = .expanded }
     }
 }
 
@@ -112,6 +122,7 @@ extension ViewController {
         locationManager.delegate = self
         mapView.showsUserLocation = true
         configureDetailedAnnotationViewController()
+        addGestureRecognizers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,7 +139,7 @@ extension ViewController {
 //MARK:- OverlayViewController
 extension ViewController {
     private func configureDetailedAnnotationViewController() {
-        overlayVC.view.frame = CGRect(x: 0, y: view.frame.height - 90, width: view.frame.width, height: view.frame.height - 80)
+        overlayVC.view.frame = CGRect(x: 0, y: view.frame.height - 90, width: view.frame.width, height: view.frame.height - 60)
         overlayVC.gestureRecognizerDelegate = self
         addChild(overlayVC)
         view.addSubview(overlayVC.view)
@@ -137,12 +148,30 @@ extension ViewController {
 
 //MARK:- OverlayGestureRecognizerDelegate
 extension ViewController: OverlayGestureRecognizerDelegate {
-    func handleTapGestureRecognizer(_ recognizer: UITapGestureRecognizer) {
-        switch overlayVC.currentCardState {
-        case .collapsed: overlayVC.currentCardState = .expanded
-        case .expanded: overlayVC.currentCardState = .fullyExpanded
-        case .fullyExpanded: overlayVC.currentCardState = .collapsed
-        }
+    func handleOverlayTapGestureRecognizer(_ recognizer: UITapGestureRecognizer) {
+        overlayVC.handleTapGestureRecognizer(recognizer)
+    }
+    
+    func handleOverlayPanGestureRecognizer(_ recognizer: UIPanGestureRecognizer) {
+        overlayVC.handlePanGestureRecognizer(recognizer)
+    }
+}
+
+//MARK:- MapViewGestureRecognizerDelegate
+extension ViewController: MapViewGestureRecognizerDelegate {
+    private func addGestureRecognizers() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleMapViewTapGestureRecognizer(_:)))
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleMapViewPanGestureRecognizer(_:)))
+        mapView.addGestureRecognizer(tapGestureRecognizer)
+        mapView.addGestureRecognizer(panGestureRecognizer)
+    }
+    
+    func handleMapViewTapGestureRecognizer(_ recognizer: UITapGestureRecognizer) {
+        if overlayVC.currentCardState == .fullyExpanded { overlayVC.currentCardState = .expanded }
+    }
+    
+    func handleMapViewPanGestureRecognizer(_ recognizer: UIPanGestureRecognizer) {
+        print(#function)
     }
 }
 
