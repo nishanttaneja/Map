@@ -104,10 +104,6 @@ extension ViewController: CLLocationManagerDelegate {
 
 //MARK:- UIResponders
 extension ViewController {
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        super.touchesBegan(touches, with: event)
-//        print(#function)
-//    }
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         if requestCurrentLocation { requestCurrentLocation = false }
@@ -161,10 +157,12 @@ extension ViewController {
 //MARK:- OverlayGestureRecognizerDelegate
 extension ViewController: OverlayGestureRecognizerDelegate {
     func handleOverlayTapGestureRecognizer(_ recognizer: UITapGestureRecognizer) {
+        requestCurrentLocation = false
         overlayVC.handleTapGestureRecognizer(recognizer)
     }
     
     func handleOverlayPanGestureRecognizer(_ recognizer: UIPanGestureRecognizer) {
+        requestCurrentLocation = false
         overlayVC.handlePanGestureRecognizer(recognizer)
     }
 }

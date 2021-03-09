@@ -22,6 +22,7 @@ enum OverlayCardState {
 
 class OverlayViewController: UIViewController {
     // IBOutlets
+    @IBOutlet weak var dragView: UIView!
     @IBOutlet weak private var draggableView: UIView!
     @IBOutlet weak private var searchBar: UISearchBar!
     @IBOutlet weak private var collectionView: UICollectionView!
@@ -127,6 +128,7 @@ extension OverlayViewController {
 extension OverlayViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        dragView.layer.cornerRadius = 2
     }
     
     override func viewWillAppear(_ animated: Bool) {

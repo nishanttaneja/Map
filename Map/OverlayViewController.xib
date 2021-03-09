@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OverlayViewController" customModule="Map" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="5jc-MZ-ntd" id="zfq-LY-YCR"/>
+                <outlet property="dragView" destination="m5O-eV-tSn" id="o4N-pm-hAN"/>
                 <outlet property="draggableView" destination="LB3-Aq-e1h" id="rF6-rJ-3Ev"/>
                 <outlet property="searchBar" destination="3U1-25-11e" id="sk6-nw-qvI"/>
                 <outlet property="separatorLabel" destination="GQb-15-zzr" id="fFa-KU-BnF"/>
@@ -24,10 +25,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LB3-Aq-e1h">
-                    <rect key="frame" x="0.0" y="44" width="414" height="70"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="69"/>
                     <subviews>
                         <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="3U1-25-11e">
-                            <rect key="frame" x="0.0" y="15" width="414" height="55"/>
+                            <rect key="frame" x="10" y="14" width="394" height="55"/>
                             <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="55" id="9lN-k5-COP"/>
@@ -41,29 +42,26 @@
                                 <outlet property="delegate" destination="-1" id="WEF-At-t3g"/>
                             </connections>
                         </searchBar>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVx-6o-Pmp">
-                            <rect key="frame" x="177" y="5" width="60" height="5"/>
-                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m5O-eV-tSn">
+                            <rect key="frame" x="177" y="10" width="60" height="4"/>
+                            <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="60" id="8E3-Uj-x8w"/>
-                                <constraint firstAttribute="height" constant="5" id="o0A-UZ-ZOO"/>
+                                <constraint firstAttribute="height" constant="4" id="4yh-d7-zHe"/>
+                                <constraint firstAttribute="width" constant="60" id="fko-9m-vbH"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        </view>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="m5O-eV-tSn" firstAttribute="centerX" secondItem="LB3-Aq-e1h" secondAttribute="centerX" id="0Bn-iW-GOD"/>
                         <constraint firstAttribute="bottom" secondItem="3U1-25-11e" secondAttribute="bottom" id="0id-b4-bdw"/>
-                        <constraint firstItem="3U1-25-11e" firstAttribute="leading" secondItem="LB3-Aq-e1h" secondAttribute="leading" id="ZgP-Wr-sVL"/>
-                        <constraint firstItem="3U1-25-11e" firstAttribute="top" secondItem="eVx-6o-Pmp" secondAttribute="bottom" constant="5" id="aNV-n1-ASK"/>
-                        <constraint firstAttribute="trailing" secondItem="3U1-25-11e" secondAttribute="trailing" id="j2u-qn-p0T"/>
-                        <constraint firstItem="eVx-6o-Pmp" firstAttribute="centerX" secondItem="LB3-Aq-e1h" secondAttribute="centerX" id="o30-dr-exo"/>
-                        <constraint firstItem="eVx-6o-Pmp" firstAttribute="top" secondItem="LB3-Aq-e1h" secondAttribute="top" constant="5" id="vzV-Al-EpX"/>
+                        <constraint firstItem="3U1-25-11e" firstAttribute="leading" secondItem="LB3-Aq-e1h" secondAttribute="leading" constant="10" id="ZgP-Wr-sVL"/>
+                        <constraint firstItem="3U1-25-11e" firstAttribute="top" secondItem="m5O-eV-tSn" secondAttribute="bottom" id="dPo-iX-WBS"/>
+                        <constraint firstAttribute="trailing" secondItem="3U1-25-11e" secondAttribute="trailing" constant="10" id="j2u-qn-p0T"/>
+                        <constraint firstItem="m5O-eV-tSn" firstAttribute="top" secondItem="LB3-Aq-e1h" secondAttribute="top" constant="10" id="nwM-jV-nBH"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="5jc-MZ-ntd">
-                    <rect key="frame" x="0.0" y="124" width="414" height="300"/>
+                    <rect key="frame" x="0.0" y="123" width="414" height="300"/>
                     <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="300" id="9vR-qM-yVG"/>
@@ -76,11 +74,11 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KaT-4a-net">
-                    <rect key="frame" x="0.0" y="446" width="414" height="416"/>
+                    <rect key="frame" x="0.0" y="445" width="414" height="417"/>
                     <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GQb-15-zzr">
-                    <rect key="frame" x="20" y="434" width="374" height="2"/>
+                    <rect key="frame" x="20" y="433" width="374" height="2"/>
                     <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="2" id="ipf-8M-1BT"/>
