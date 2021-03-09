@@ -15,6 +15,9 @@ class OverlayViewController: UIViewController {
     // IBOutlets
     @IBOutlet weak var draggableView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var separatorLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     // Delegates
     weak var gestureRecognizerDelegate: OverlayGestureRecognizerDelegate?

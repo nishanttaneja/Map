@@ -10,8 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OverlayViewController" customModule="Map" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="5jc-MZ-ntd" id="zfq-LY-YCR"/>
                 <outlet property="draggableView" destination="LB3-Aq-e1h" id="rF6-rJ-3Ev"/>
                 <outlet property="searchBar" destination="3U1-25-11e" id="sk6-nw-qvI"/>
+                <outlet property="separatorLabel" destination="GQb-15-zzr" id="fFa-KU-BnF"/>
+                <outlet property="tableView" destination="KaT-4a-net" id="Foh-MB-OeJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
