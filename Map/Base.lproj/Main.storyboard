@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gCN-yB-4Dn">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="3yj-1R-XM1"/>
                                 </connections>
@@ -73,7 +73,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="gCN-yB-4Dn" secondAttribute="bottom" id="65K-8S-iSc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gCN-yB-4Dn" secondAttribute="bottom" id="65K-8S-iSc"/>
                             <constraint firstItem="gCN-yB-4Dn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="TpW-wy-k1v"/>
                             <constraint firstItem="gCN-yB-4Dn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Xsq-x8-H6s"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZxR-yz-J0k" secondAttribute="trailing" constant="10" id="Y97-Vh-jA8"/>

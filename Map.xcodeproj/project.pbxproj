@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B44095FF25F75346003DF15B /* DetailedAnnotationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44095FD25F75346003DF15B /* DetailedAnnotationViewController.swift */; };
+		B440960025F75346003DF15B /* DetailedAnnotationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B44095FE25F75346003DF15B /* DetailedAnnotationViewController.xib */; };
 		B47D923025F343CA005D48FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47D922F25F343CA005D48FD /* AppDelegate.swift */; };
 		B47D923225F343CA005D48FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47D923125F343CA005D48FD /* SceneDelegate.swift */; };
 		B47D923425F343CA005D48FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47D923325F343CA005D48FD /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B44095FD25F75346003DF15B /* DetailedAnnotationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedAnnotationViewController.swift; sourceTree = "<group>"; };
+		B44095FE25F75346003DF15B /* DetailedAnnotationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailedAnnotationViewController.xib; sourceTree = "<group>"; };
 		B47D922C25F343CA005D48FD /* Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Map.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B47D922F25F343CA005D48FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B47D923125F343CA005D48FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 				B47D922F25F343CA005D48FD /* AppDelegate.swift */,
 				B47D923125F343CA005D48FD /* SceneDelegate.swift */,
 				B47D923325F343CA005D48FD /* ViewController.swift */,
+				B44095FD25F75346003DF15B /* DetailedAnnotationViewController.swift */,
+				B44095FE25F75346003DF15B /* DetailedAnnotationViewController.xib */,
 				B47D923525F343CA005D48FD /* Main.storyboard */,
 				B47D923825F343CC005D48FD /* Assets.xcassets */,
 				B47D923A25F343CC005D48FD /* LaunchScreen.storyboard */,
@@ -127,6 +133,7 @@
 				B47D923C25F343CC005D48FD /* LaunchScreen.storyboard in Resources */,
 				B47D923925F343CC005D48FD /* Assets.xcassets in Resources */,
 				B47D923725F343CA005D48FD /* Main.storyboard in Resources */,
+				B440960025F75346003DF15B /* DetailedAnnotationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +147,7 @@
 				B47D923425F343CA005D48FD /* ViewController.swift in Sources */,
 				B47D923025F343CA005D48FD /* AppDelegate.swift in Sources */,
 				B47D923225F343CA005D48FD /* SceneDelegate.swift in Sources */,
+				B44095FF25F75346003DF15B /* DetailedAnnotationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var infoAndCurrentLocationStackView: UIStackView!
     @IBOutlet private weak var infoButton: UIButton!
     @IBOutlet private weak var currentLocationButton: UIButton!
+    private var detailedAnnotationVC = DetailedAnnotationViewController(nibName: "DetailedAnnotationViewController", bundle: nil)
     
     // Variables | Constants
     private var locationManager = CLLocationManager()
@@ -121,11 +122,26 @@ extension ViewController {
         infoAndCurrentLocationStackView.configureUI()
         locationManager.delegate = self
         mapView.showsUserLocation = true
+        configureDetailedAnnotationViewController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         requestCurrentLocation = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        requestCurrentLocation = false
+    }
+}
+
+//MARK:- DetailedAnnotationViewController
+extension ViewController {
+    private func configureDetailedAnnotationViewController() {
+        detailedAnnotationVC.view.frame = CGRect(x: 0, y: mapView.frame.height - 70, width: view.frame.width, height: view.frame.height - 80)
+        addChild(detailedAnnotationVC)
+        view.addSubview(detailedAnnotationVC.view)
     }
 }
 
