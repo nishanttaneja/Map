@@ -12,6 +12,10 @@ import UIKit
     func handleOverlayPanGestureRecognizer(_ recognizer: UIPanGestureRecognizer)
 }
 
+protocol VisualEffectViewDelegate: class {
+    var visualEffectView: UIVisualEffectView { get set }
+}
+
 enum OverlayCardState {
     case collapsed, expanded, fullyExpanded
 }
@@ -26,6 +30,7 @@ class OverlayViewController: UIViewController {
     
     // Delegates
     weak var gestureRecognizerDelegate: OverlayGestureRecognizerDelegate?
+    weak var visualEffectViewDelegate: VisualEffectViewDelegate?
     
     // Variables
     var currentCardState: OverlayCardState = .collapsed {
@@ -80,9 +85,11 @@ extension OverlayViewController {
         }
         let frameAnimator = animator(ofType: .frame, forState: state)
         let cornerRadiusAnimator = animator(ofType: .cornerRadius, forState: state)
+        let visualEffectAnimator = animator(ofType: .visualEffect, forState: state)
         frameAnimator.startAnimation()
         cornerRadiusAnimator.startAnimation()
-        runningAnimators.append(contentsOf: [frameAnimator, cornerRadiusAnimator])
+        visualEffectAnimator.startAnimation()
+        runningAnimators.append(contentsOf: [frameAnimator, cornerRadiusAnimator, visualEffectAnimator])
     }
     
     private func animator(ofType type: AnimatorType, forState overlayCardState: OverlayCardState) -> UIViewPropertyAnimator {
@@ -101,12 +108,17 @@ extension OverlayViewController {
                 guard self != nil else { return }
                 self!.view.layer.cornerRadius = self!.height(for: overlayCardState)/40
             })
+        case .visualEffect:
+            animator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 1, animations: { [weak visualEffectViewDelegate] in
+                guard visualEffectViewDelegate != nil else { return }
+                visualEffectViewDelegate!.visualEffectView.effect = overlayCardState == .fullyExpanded ? UIBlurEffect(style: .prominent) : nil
+            })
         }
         return animator
     }
     
     private enum AnimatorType {
-        case frame, cornerRadius
+        case frame, cornerRadius, visualEffect
     }
 }
 

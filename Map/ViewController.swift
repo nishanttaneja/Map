@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var infoButton: UIButton!
     @IBOutlet private weak var currentLocationButton: UIButton!
     private var overlayVC = OverlayViewController(nibName: "OverlayViewController", bundle: nil)
+    var visualEffectView = UIVisualEffectView()
     
     // Variables | Constants
     private var locationManager = CLLocationManager()
@@ -121,7 +122,8 @@ extension ViewController {
         infoAndCurrentLocationStackView.configureUI()
         locationManager.delegate = self
         mapView.showsUserLocation = true
-        configureDetailedAnnotationViewController()
+        configureVisualEffectView()
+        configureOverlayViewController()
         addGestureRecognizers()
     }
     
@@ -136,11 +138,21 @@ extension ViewController {
     }
 }
 
+//MARK:- VisualEffectView
+extension ViewController: VisualEffectViewDelegate {
+    private func configureVisualEffectView() {
+        visualEffectView.frame = view.frame
+        visualEffectView.isUserInteractionEnabled = false
+        view.addSubview(visualEffectView)
+    }
+}
+
 //MARK:- OverlayViewController
 extension ViewController {
-    private func configureDetailedAnnotationViewController() {
+    private func configureOverlayViewController() {
         overlayVC.view.frame = CGRect(x: 0, y: view.frame.height - 90, width: view.frame.width, height: view.frame.height - 60)
         overlayVC.gestureRecognizerDelegate = self
+        overlayVC.visualEffectViewDelegate = self
         addChild(overlayVC)
         view.addSubview(overlayVC.view)
     }
