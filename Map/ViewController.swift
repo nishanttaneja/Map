@@ -57,7 +57,10 @@ class ViewController: UIViewController {
     }
     private var currentRegion: MKCoordinateRegion {
         get { mapView.region }
-        set { mapView.setRegion(newValue, animated: true) }
+        set {
+            mapView.setRegion(newValue, animated: true)
+            overlayVC.mapViewRegion = newValue
+        }
     }
     
     // IBActions

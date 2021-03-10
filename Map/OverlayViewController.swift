@@ -5,7 +5,7 @@
 //  Created by Nishant Taneja on 09/03/21.
 //
 
-import UIKit
+import MapKit
 
 @objc protocol OverlayGestureRecognizerDelegate: class {
     func handleOverlayTapGestureRecognizer(_ recognizer: UITapGestureRecognizer)
@@ -46,6 +46,14 @@ class OverlayViewController: UIViewController {
         }
     }
     private var runningAnimators = [UIViewPropertyAnimator]()
+    var mapViewRegion: MKCoordinateRegion?
+    private let localSearchRequest = MKLocalSearch.Request()
+    private var localSearch: MKLocalSearch!
+    private var mapItems = [MKMapItem]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 }
 
 //MARK:- UISearchBarDelegate
@@ -57,6 +65,17 @@ extension OverlayViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = true
         return true
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        localSearchRequest.naturalLanguageQuery = searchText
+        localSearch = MKLocalSearch(request: localSearchRequest)
+        localSearch.start { [weak self] (localSearchResponse, error) in
+            guard self != nil else { return }
+            if error != nil { print(error!.localizedDescription); return }
+            if localSearchResponse != nil { self!.mapItems = localSearchResponse!.mapItems }
+        }
+    }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         currentCardState = .expanded
     }
@@ -123,12 +142,28 @@ extension OverlayViewController {
     }
 }
 
+//MARK:- UITableViewDataSource
+extension OverlayViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        mapItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MapItem", for: indexPath) as? MapItemTableViewCell else { return UITableViewCell() }
+        cell.title = mapItems[indexPath.row].name
+        cell.subtitle = mapItems[indexPath.row].placemark.title
+        cell.number = mapItems[indexPath.row].phoneNumber
+        return cell
+    }
+}
 
 //MARK:- View LifeCycle
 extension OverlayViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dragView.layer.cornerRadius = 2
+        tableView.register(UINib(nibName: "MapItemTableViewCell", bundle: nil), forCellReuseIdentifier: "MapItem")
+        localSearchRequest.resultTypes = .pointOfInterest
     }
     
     override func viewWillAppear(_ animated: Bool) {
